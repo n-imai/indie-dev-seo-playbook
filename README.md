@@ -34,6 +34,17 @@ ChatGPT・Claude・Perplexity の登場で、検索流入の構造は静かに�
 
 - **01. Bing Webmaster Tools 活用ガイド — Google だけ見てると見落とすもの** — [note で読む](https://note.com/honeymarron_dev/n/n8dfd69eda0fd) / [リポ内 summary](chapters/01-bing-webmaster-tools.md)
 
+## Tools
+
+note 記事で言及した監査タスクを実行可能な形にしたツール群が [`tools/`](tools/README.md) にあります。
+
+- [`meta-desc-checker.py`](tools/meta-desc-checker.py) — meta description 長さ監査
+- [`twin-fields-check.py`](tools/twin-fields-check.py) — meta/og/twitter/JSON-LD の同期検証
+- [`common-crawl-check.sh`](tools/common-crawl-check.sh) — Common Crawl 収録確認 (AI 検索流入の根本原因チェック)
+- [`bing-resubmit.sh`](tools/bing-resubmit.sh) — Bing Webmaster URL 一括再送信
+
+すべて単一ファイル・標準ライブラリのみで動作。`git clone` してそのまま自分のサイトに対して走らせられます。詳細は [`tools/README.md`](tools/README.md)。
+
 ### Planned (近日追加)
 
 - 02. meta タグの twin fields 同期 — JSON-LD / og: / twitter: の罠

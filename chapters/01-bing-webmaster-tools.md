@@ -30,13 +30,14 @@
 
 役割を分離して、それぞれのプラットフォームの strength を活かす構成にしています。**記事本文を両方に置くと duplicate content として SEO 上どちらかが suppress されるため**、こちらは要約 + リンクのみにしています。
 
-## 関連ツール (将来追加予定)
+## 関連ツール
 
-このリポの `tools/` 配下に、記事中で言及した処理を実行可能な形で追加していく予定です:
+このリポの [`tools/`](../tools/README.md) 配下に、記事中で言及した処理を実行可能な形で置いています:
 
-- `tools/meta-desc-length-checker.py` — 全 HTML の meta description 長さチェック
-- `tools/twin-fields-sync-check.py` — JSON-LD / og: / twitter: の同期検証
-- `tools/common-crawl-coverage-check.sh` — Common Crawl 収録確認
+- [`tools/meta-desc-checker.py`](../tools/meta-desc-checker.py) — 全 HTML の meta description 長さチェック
+- [`tools/twin-fields-check.py`](../tools/twin-fields-check.py) — meta/og/twitter/JSON-LD の同期検証
+- [`tools/common-crawl-check.sh`](../tools/common-crawl-check.sh) — Common Crawl 収録確認
+- [`tools/bing-resubmit.sh`](../tools/bing-resubmit.sh) — Bing Webmaster API 経由の URL 一括再送信
 
 ## 関連
 
