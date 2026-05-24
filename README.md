@@ -48,7 +48,15 @@ ChatGPT・Claude・Perplexity の登場で、検索流入の構造は静かに�
 
 ## License
 
-[MIT License](LICENSE) — どうぞお持ち帰りください。引用・転載・改変・商用利用 OK、attribution 必須なし(あれば歓迎)。
+[Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE)
+
+引用・転載・改変・商用利用 OK。**attribution (出典表記) のみお願いします。**
+
+推奨の表記:
+
+> "Indie Dev SEO Playbook" by honeymarron ([honeymarron.com](https://honeymarron.com)),
+> licensed under CC BY 4.0.
+> Source: https://github.com/n-imai/indie-dev-seo-playbook
 
 ## Author
 
