@@ -1,0 +1,55 @@
+# Indie Dev SEO Playbook
+
+> ChatGPT / Claude / Perplexity 時代の個人開発者向け SEO/ASO 実践集
+>
+> 個人開発で iOS アプリ 2 本を 175 カ国に流通させた [honeymarron](https://honeymarron.com) が、SEO・ASO・AI 検索対応で実際に効いた施策を備忘録としてまとめています。
+
+[English version is planned — Japanese first because most learnings were derived in JP/EN bilingual context.]
+
+## なぜこの Playbook を作ったか
+
+ChatGPT・Claude・Perplexity の登場で、検索流入の構造は静かに変わりました。
+
+- Google だけでなく **Bing**(Copilot 経由で AI 検索の母体)
+- **Common Crawl** (ChatGPT/Claude の training data の中核)
+- **llms.txt** (AI クローラー向け仕様)
+
+への対応が、これからの個人開発者には不可欠です。
+
+しかし「個人開発者が一人でできる現実的な施策」のまとまった資料が見当たりません。Google Search Console と sitemap.xml の話までは Web に大量にあるけれど、その先 (Bing Webmaster Tools の本気の使い方、AI 検索向けの構造化、Common Crawl 収録の狙い方) を一気通貫で書いた資料は少ない。
+
+このリポは、`honeymarron.com` 運営で実際に試して効いた / 効かなかった施策を、Before/After の数字とコマンド付きで書き残しています。
+
+## 開発者の実績 (2026-05 時点)
+
+- [**Award Certificate Creator**](https://apps.apple.com/app/id6748368413) — 175 カ国流通 / 月 1,000 MAU / App Store ★4.3
+- [**VoicyCare**](https://apps.apple.com/app/id6749561636) — 175 カ国流通 / App Store ★5.0
+- 公式サイト: [honeymarron.com](https://honeymarron.com) — Vercel + バニラ HTML/CSS
+
+すべて個人で企画・開発・運営。Tech stack: Flutter / Swift / Ruby on Rails / Node.js / TypeScript / Go / AWS。
+
+## Table of Contents
+
+### Published
+
+- [01. Bing Webmaster Tools 活用ガイド — Google だけ見てると見落とすもの](chapters/01-bing-webmaster-tools.md)
+
+### Planned (近日追加)
+
+- 02. meta タグの twin fields 同期 — JSON-LD / og: / twitter: の罠
+- 03. www → non-www の 301 化 — Vercel Dashboard と vercel.json の優先順位
+- 04. Common Crawl と AI 検索流入の関係 — なぜ collection 0 件だと AI 検索に出ないのか
+- 05. ASC `ct` パラメータの分離設計 — `lp_hero` / `lp_main` / `lp_footer` で fold above/below を計測する
+- 06. 多言語対応の落とし穴 — App Store URL の `/jp/` パスと `l=en` パラメータの罠
+- 07. GA4 / GSC / Bing / DataForSEO の測定スタック — 1 ソースだけでは見えない真実
+- 08. 個人開発者向け `llms.txt` 設計 — AI クローラーに何を見せるか
+
+> 章はランダム順ではなく **「個人開発者が日次・週次・月次で取り組むべき順」** に並べています。01 から順に読むと、無理なくセットアップが完了する想定。
+
+## License
+
+[MIT License](LICENSE) — どうぞお持ち帰りください。引用・転載・改変・商用利用 OK、attribution 必須なし(あれば歓迎)。
+
+## Author
+
+[honeymarron](https://honeymarron.com) — 日本を拠点とする個人 iOS アプリ開発者・フルスタックソフトウェアエンジニア。GitHub: [@n-imai](https://github.com/n-imai)
