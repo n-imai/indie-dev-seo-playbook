@@ -22,8 +22,8 @@ ChatGPT・Claude・Perplexity の登場で、検索流入の構造は静かに�
 
 ## 開発者の実績 (2026-05 時点)
 
-- [**Award Certificate Creator**](https://apps.apple.com/app/id6748368413) — 175 カ国流通 / 月 1,000 MAU / App Store ★4.3
-- [**VoicyCare**](https://apps.apple.com/app/id6749561636) — 175 カ国流通 / App Store ★5.0
+- [**表彰状クリエイター**](https://apps.apple.com/jp/app/id6748368413) — 175 カ国流通 / 月 1,000 MAU / App Store ★4.3
+- [**VoicyCare**](https://apps.apple.com/jp/app/id6749561636) — 175 カ国流通 / App Store ★5.0
 - 公式サイト: [honeymarron.com](https://honeymarron.com) — Vercel + バニラ HTML/CSS
 
 すべて個人で企画・開発・運営。Tech stack: Flutter / Swift / Ruby on Rails / Node.js / TypeScript / Go / AWS。
