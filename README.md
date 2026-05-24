@@ -32,7 +32,7 @@ ChatGPT・Claude・Perplexity の登場で、検索流入の構造は静かに�
 
 ### Published
 
-- [01. Bing Webmaster Tools 活用ガイド — Google だけ見てると見落とすもの](chapters/01-bing-webmaster-tools.md)
+- **01. Bing Webmaster Tools 活用ガイド — Google だけ見てると見落とすもの** — [note で読む](https://note.com/honeymarron_dev/n/n8dfd69eda0fd) / [リポ内 summary](chapters/01-bing-webmaster-tools.md)
 
 ### Planned (近日追加)
 
