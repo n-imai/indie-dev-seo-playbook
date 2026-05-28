@@ -12,9 +12,9 @@ ChatGPT・Claude・Perplexity の登場で、検索流入の構造は静かに�
 
 - Google だけでなく **Bing**(Copilot 経由で AI 検索の母体)
 - **Common Crawl** (ChatGPT/Claude の training data の中核)
-- **llms.txt** (AI クローラー向け仕様)
+- **llms.txt** (AI 向けのサイト要約仕様 — ただし現状 AI 検索エンジンはほぼ参照しておらず、効果は不確実)
 
-への対応が、これからの個人開発者には不可欠です。
+への対応と「何が効いて何がまだ効かないか」の見極めが、これからの個人開発者には重要です。
 
 しかし「個人開発者が一人でできる現実的な施策」のまとまった資料が見当たりません。Google Search Console と sitemap.xml の話までは Web に大量にあるけれど、その先 (Bing Webmaster Tools の本気の使い方、AI 検索向けの構造化、Common Crawl 収録の狙い方) を一気通貫で書いた資料は少ない。
 
@@ -33,7 +33,7 @@ ChatGPT・Claude・Perplexity の登場で、検索流入の構造は静かに�
 ### Published
 
 - **01. Bing Webmaster Tools 活用ガイド — Google だけ見てると見落とすもの** — [note で読む](https://note.com/honeymarron_dev/n/n8dfd69eda0fd) / [リポ内 summary](chapters/01-bing-webmaster-tools.md)
-- **02. GEO — AI 検索に引用される実装（ChatGPT / Copilot / Perplexity）** — [リポ内 summary](chapters/02-geo-ai-search-citation.md)
+- **02. GEO — AI 検索に引用される実装（ChatGPT / Copilot / Perplexity）** — [note で読む](https://note.com/honeymarron_dev/n/nf2ed909fa321) / [リポ内 summary](chapters/02-geo-ai-search-citation.md)
 
 ## Tools
 
