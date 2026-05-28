@@ -11,6 +11,8 @@ note 記事で言及した SEO/ASO 監査タスクを実行可能な形にした
 | [`twin-fields-check.py`](twin-fields-check.py) | meta/og/twitter/JSON-LD の twin fields 同期検証 | Python 3.10+ | 標準ライブラリのみ |
 | [`common-crawl-check.sh`](common-crawl-check.sh) | Common Crawl 収録状況の確認 | Bash | `curl` |
 | [`bing-resubmit.sh`](bing-resubmit.sh) | Bing Webmaster URL 一括再送信 | Bash | `curl`, `jq` |
+| [`llms-txt-generator.py`](llms-txt-generator.py) | sitemap.xml から llms.txt skeleton 生成 | Python 3.10+ | 標準ライブラリのみ |
+| [`schema-faq-generator.py`](schema-faq-generator.py) | Q&A テキストから FAQPage JSON-LD 生成 | Python 3.10+ | 標準ライブラリのみ |
 
 ## meta-desc-checker.py
 
@@ -167,6 +169,26 @@ Success: 3 URLs submitted to Bing.
   ✓ https://yoursite.com/articles/post1
   ✓ https://yoursite.com/articles/post2
   ✓ https://yoursite.com/articles/post3
+```
+
+## llms-txt-generator.py
+
+```bash
+# sitemap.xml から llms.txt の skeleton を生成 (ページを fetch して title/description も取得)
+python3 tools/llms-txt-generator.py /path/to/sitemap.xml --site-name "My Site" --summary "サイトの一行説明"
+
+# fetch せず URL だけ並べる
+python3 tools/llms-txt-generator.py /path/to/sitemap.xml --site-name "My Site" --no-fetch
+```
+
+## schema-faq-generator.py
+
+```bash
+# Q:/A: テキストファイルから FAQPage JSON-LD を生成
+python3 tools/schema-faq-generator.py faq.txt
+
+# 標準入力から
+printf 'Q: 質問?\nA: 回答。\n' | python3 tools/schema-faq-generator.py -
 ```
 
 ## License

@@ -42,7 +42,7 @@
 ## 関連
 
 - [トップに戻る](../README.md)
-- 次の章 (近日公開): meta タグの twin fields 同期
+- 次の章: [02. GEO — AI 検索に引用される実装](02-geo-ai-search-citation.md)
 
 ## Author
 

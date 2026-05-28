@@ -33,6 +33,7 @@ ChatGPT・Claude・Perplexity の登場で、検索流入の構造は静かに�
 ### Published
 
 - **01. Bing Webmaster Tools 活用ガイド — Google だけ見てると見落とすもの** — [note で読む](https://note.com/honeymarron_dev/n/n8dfd69eda0fd) / [リポ内 summary](chapters/01-bing-webmaster-tools.md)
+- **02. GEO — AI 検索に引用される実装（ChatGPT / Copilot / Perplexity）** — [リポ内 summary](chapters/02-geo-ai-search-citation.md)
 
 ## Tools
 
@@ -42,6 +43,8 @@ note 記事で言及した監査タスクを実行可能な形にしたツール
 - [`twin-fields-check.py`](tools/twin-fields-check.py) — meta/og/twitter/JSON-LD の同期検証
 - [`common-crawl-check.sh`](tools/common-crawl-check.sh) — Common Crawl 収録確認 (AI 検索流入の根本原因チェック)
 - [`bing-resubmit.sh`](tools/bing-resubmit.sh) — Bing Webmaster URL 一括再送信
+- [`llms-txt-generator.py`](tools/llms-txt-generator.py) — sitemap.xml から llms.txt skeleton 生成
+- [`schema-faq-generator.py`](tools/schema-faq-generator.py) — Q&A テキストから FAQPage JSON-LD 生成
 
 すべて単一ファイル・標準ライブラリのみで動作。`git clone` してそのまま自分のサイトに対して走らせられます。詳細は [`tools/README.md`](tools/README.md)。
 
