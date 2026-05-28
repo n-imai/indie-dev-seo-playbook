@@ -41,8 +41,10 @@ def parse_qa(text: str) -> list[tuple[str, str]]:
     answer_lines: list[str] = []
 
     def flush() -> None:
-        if question is not None and answer_lines:
-            pairs.append((question, "\n".join(answer_lines).strip()))
+        if question is not None:
+            answer = "\n".join(answer_lines).strip()
+            if answer:
+                pairs.append((question, answer))
 
     for raw in text.splitlines():
         line = raw.rstrip("\n")

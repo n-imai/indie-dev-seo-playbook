@@ -25,6 +25,16 @@ class TestParseQa(unittest.TestCase):
         text = "Q: Q1\nA: a1\n\nQ: Q2\nA: a2\n"
         self.assertEqual(m.parse_qa(text), [("Q1", "a1"), ("Q2", "a2")])
 
+    def test_empty_answer_dropped(self):
+        # A: with only whitespace immediately followed by next Q: → that pair is dropped
+        text = "Q: q1\nA:   \nQ: q2\nA: a2"
+        self.assertEqual(m.parse_qa(text), [("q2", "a2")])
+
+    def test_q_without_a_dropped(self):
+        # Q with no A: line before the next Q: → that pair is dropped
+        text = "Q: lonely\nQ: q2\nA: a2"
+        self.assertEqual(m.parse_qa(text), [("q2", "a2")])
+
 
 class TestBuildFaqpageJsonld(unittest.TestCase):
     def test_structure(self):

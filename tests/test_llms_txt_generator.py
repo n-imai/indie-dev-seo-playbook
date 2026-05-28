@@ -53,6 +53,11 @@ class TestExtractTitleDesc(unittest.TestCase):
         self.assertEqual(m.extract_title_desc("<html><head></head></html>"),
                          (None, None))
 
+    def test_single_quoted_description(self):
+        html = ('<head><title>T</title>'
+                '<meta name="description" content=\'single quoted\'></head>')
+        self.assertEqual(m.extract_title_desc(html), ("T", "single quoted"))
+
 
 class TestFormatLlmsTxt(unittest.TestCase):
     def test_formats_markdown(self):

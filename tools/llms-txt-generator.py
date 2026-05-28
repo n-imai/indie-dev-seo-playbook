@@ -24,6 +24,7 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -35,7 +36,7 @@ _SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 # 取りこぼす場合がある。skeleton 生成後の人手チェックを前提とする。
 _TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.IGNORECASE | re.DOTALL)
 _DESC_RE = re.compile(
-    r'<meta\s+name=["\']description["\']\s+content="([^"]*)"',
+    r'<meta\s+name=["\']description["\']\s+content=(["\'])(.*?)\1',
     re.IGNORECASE,
 )
 
@@ -43,7 +44,7 @@ _DESC_RE = re.compile(
 def parse_sitemap(xml: str) -> list[str]:
     """sitemap.xml 文字列から <loc> の URL を取り出す。
 
-    sitemap 標準名前空間 (0.9) の <loc> のみ対象。image:/video:/news: 拡張の
+    sitemap 標準名前空間 (0.9) と名前空間なしの <loc> を対象とする。image:/video:/news: 拡張の
     <loc> は別名前空間なので除外される。sitemapindex (子 sitemap を列挙する
     ファイル) が渡された場合は対象外なので警告して空リストを返す。
     """
@@ -67,7 +68,7 @@ def extract_title_desc(html: str) -> tuple[str | None, str | None]:
     t = _TITLE_RE.search(html)
     d = _DESC_RE.search(html)
     title = t.group(1).strip() if t else None
-    desc = d.group(1).strip() if d else None
+    desc = d.group(2).strip() if d else None
     return (title, desc)
 
 
@@ -108,21 +109,43 @@ def main() -> int:
         print(f"Error: {path} is not a file", file=sys.stderr)
         return 2
 
-    urls = parse_sitemap(path.read_text(encoding="utf-8"))
+    try:
+        urls = parse_sitemap(path.read_text(encoding="utf-8"))
+    except ET.ParseError as e:
+        print(f"Error: {path} is not valid XML: {e}", file=sys.stderr)
+        return 2
     if args.limit > 0:
         urls = urls[: args.limit]
 
+    if not urls:
+        print("Error: no <loc> URLs found in sitemap", file=sys.stderr)
+        return 2
+
     entries: list[tuple[str, str, str]] = []
+    fetch_attempts = 0
+    fetch_failures = 0
     for url in urls:
         title, desc = ("", "")
         if not args.no_fetch:
+            fetch_attempts += 1
+            html = None
             try:
                 html = _fetch(url)
+            except (urllib.error.URLError, TimeoutError, ValueError) as e:
+                fetch_failures += 1
+                print(f"Warning: failed to fetch {url}: {e}", file=sys.stderr)
+            if html is not None:
                 t, d = extract_title_desc(html)
                 title, desc = (t or ""), (d or "")
-            except Exception as e:  # noqa: BLE001
-                print(f"Warning: failed to fetch {url}: {e}", file=sys.stderr)
         entries.append((url, title, desc))
+
+    if fetch_attempts > 0 and fetch_failures == fetch_attempts:
+        print(f"Error: all {fetch_attempts} page fetches failed; "
+              f"no titles/descriptions extracted", file=sys.stderr)
+        return 2
+    if fetch_failures:
+        print(f"Note: {fetch_failures}/{fetch_attempts} page fetches failed",
+              file=sys.stderr)
 
     print(format_llms_txt(args.site_name, args.summary, entries))
     return 0
