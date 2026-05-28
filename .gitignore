@@ -6,3 +6,7 @@ node_modules/
 *.log
 .env*
 !.env.example
+
+# Python
+__pycache__/
+*.pyc
