@@ -2,7 +2,7 @@
 
 > 📝 **本文は note で公開しています**
 >
-> （note 投稿後に URL を記入）
+> [個人開発者が AI 検索に引用されるためにやったこと — Bing の次のステップ](https://note.com/honeymarron_dev/n/nf2ed909fa321)
 
 ---
 

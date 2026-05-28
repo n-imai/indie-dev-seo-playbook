@@ -17,7 +17,7 @@ Exit code:
     2  入力エラー
 
 Related article:
-    (note 第二弾 GEO 記事 — 公開後に URL を記入)
+    https://note.com/honeymarron_dev/n/nf2ed909fa321
 """
 from __future__ import annotations
 
