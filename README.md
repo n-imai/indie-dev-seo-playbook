@@ -33,6 +33,7 @@ ChatGPT・Claude・Perplexity の登場で、検索流入の構造は静かに�
 ### Published
 
 - **01. Bing Webmaster Tools 活用ガイド — Google だけ見てると見落とすもの** — [note で読む](https://note.com/honeymarron_dev/n/n8dfd69eda0fd) / [リポ内 summary](chapters/01-bing-webmaster-tools.md)
+- **02. GEO — AI 検索に引用される実装（ChatGPT / Copilot / Perplexity）** — [リポ内 summary](chapters/02-geo-ai-search-citation.md)
 
 ## Tools
 
@@ -42,18 +43,19 @@ note 記事で言及した監査タスクを実行可能な形にしたツール
 - [`twin-fields-check.py`](tools/twin-fields-check.py) — meta/og/twitter/JSON-LD の同期検証
 - [`common-crawl-check.sh`](tools/common-crawl-check.sh) — Common Crawl 収録確認 (AI 検索流入の根本原因チェック)
 - [`bing-resubmit.sh`](tools/bing-resubmit.sh) — Bing Webmaster URL 一括再送信
+- [`llms-txt-generator.py`](tools/llms-txt-generator.py) — sitemap.xml から llms.txt skeleton 生成
+- [`schema-faq-generator.py`](tools/schema-faq-generator.py) — Q&A テキストから FAQPage JSON-LD 生成
 
 すべて単一ファイル・標準ライブラリのみで動作。`git clone` してそのまま自分のサイトに対して走らせられます。詳細は [`tools/README.md`](tools/README.md)。
 
 ### Planned (近日追加)
 
-- 02. meta タグの twin fields 同期 — JSON-LD / og: / twitter: の罠
-- 03. www → non-www の 301 化 — Vercel Dashboard と vercel.json の優先順位
-- 04. Common Crawl と AI 検索流入の関係 — なぜ collection 0 件だと AI 検索に出ないのか
-- 05. ASC `ct` パラメータの分離設計 — `lp_hero` / `lp_main` / `lp_footer` で fold above/below を計測する
-- 06. 多言語対応の落とし穴 — App Store URL の `/jp/` パスと `l=en` パラメータの罠
-- 07. GA4 / GSC / Bing / DataForSEO の測定スタック — 1 ソースだけでは見えない真実
-- 08. 個人開発者向け `llms.txt` 設計 — AI クローラーに何を見せるか
+- 03. meta タグの twin fields 同期 — JSON-LD / og: / twitter: の罠
+- 04. www → non-www の 301 化 — Vercel Dashboard と vercel.json の優先順位
+- 05. Common Crawl と AI 検索流入の関係 — なぜ collection 0 件だと AI 検索に出ないのか
+- 06. ASC `ct` パラメータの分離設計 — `lp_hero` / `lp_main` / `lp_footer` で fold above/below を計測する
+- 07. 多言語対応の落とし穴 — App Store URL の `/jp/` パスと `l=en` パラメータの罠
+- 08. GA4 / GSC / Bing / DataForSEO の測定スタック — 1 ソースだけでは見えない真実
 
 > 章はランダム順ではなく **「個人開発者が日次・週次・月次で取り組むべき順」** に並べています。01 から順に読むと、無理なくセットアップが完了する想定。
 
