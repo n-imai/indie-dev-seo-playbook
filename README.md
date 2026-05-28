@@ -50,13 +50,12 @@ note 記事で言及した監査タスクを実行可能な形にしたツール
 
 ### Planned (近日追加)
 
-- 02. meta タグの twin fields 同期 — JSON-LD / og: / twitter: の罠
-- 03. www → non-www の 301 化 — Vercel Dashboard と vercel.json の優先順位
-- 04. Common Crawl と AI 検索流入の関係 — なぜ collection 0 件だと AI 検索に出ないのか
-- 05. ASC `ct` パラメータの分離設計 — `lp_hero` / `lp_main` / `lp_footer` で fold above/below を計測する
-- 06. 多言語対応の落とし穴 — App Store URL の `/jp/` パスと `l=en` パラメータの罠
-- 07. GA4 / GSC / Bing / DataForSEO の測定スタック — 1 ソースだけでは見えない真実
-- 08. 個人開発者向け `llms.txt` 設計 — AI クローラーに何を見せるか
+- 03. meta タグの twin fields 同期 — JSON-LD / og: / twitter: の罠
+- 04. www → non-www の 301 化 — Vercel Dashboard と vercel.json の優先順位
+- 05. Common Crawl と AI 検索流入の関係 — なぜ collection 0 件だと AI 検索に出ないのか
+- 06. ASC `ct` パラメータの分離設計 — `lp_hero` / `lp_main` / `lp_footer` で fold above/below を計測する
+- 07. 多言語対応の落とし穴 — App Store URL の `/jp/` パスと `l=en` パラメータの罠
+- 08. GA4 / GSC / Bing / DataForSEO の測定スタック — 1 ソースだけでは見えない真実
 
 > 章はランダム順ではなく **「個人開発者が日次・週次・月次で取り組むべき順」** に並べています。01 から順に読むと、無理なくセットアップが完了する想定。
 
