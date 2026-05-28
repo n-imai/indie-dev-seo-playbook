@@ -28,6 +28,11 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+_SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
+
+# 注意: title/description は正規表現ベースの heuristic 抽出。第三者ページでは
+# 属性順 (content 先) や name/content 間の別属性、<script> 内の <title> 等で
+# 取りこぼす場合がある。skeleton 生成後の人手チェックを前提とする。
 _TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.IGNORECASE | re.DOTALL)
 _DESC_RE = re.compile(
     r'<meta\s+name=["\']description["\']\s+content="([^"]*)"',
@@ -36,11 +41,22 @@ _DESC_RE = re.compile(
 
 
 def parse_sitemap(xml: str) -> list[str]:
-    """sitemap.xml 文字列から <loc> の URL を順に取り出す。"""
+    """sitemap.xml 文字列から <loc> の URL を取り出す。
+
+    sitemap 標準名前空間 (0.9) の <loc> のみ対象。image:/video:/news: 拡張の
+    <loc> は別名前空間なので除外される。sitemapindex (子 sitemap を列挙する
+    ファイル) が渡された場合は対象外なので警告して空リストを返す。
+    """
     root = ET.fromstring(xml)
+    local_root = root.tag.split("}")[-1] if "}" in root.tag else root.tag
+    if local_root == "sitemapindex":
+        print("Warning: sitemap index detected; run against a leaf sitemap",
+              file=sys.stderr)
+        return []
     locs = []
-    for el in root.iter():
-        if el.tag.endswith("}loc") or el.tag == "loc":
+    # 名前空間付き (標準) と 名前空間なし の両方の <loc> を拾う (image:loc 等は除外)
+    for tag in (f"{{{_SITEMAP_NS}}}loc", "loc"):
+        for el in root.iter(tag):
             if el.text:
                 locs.append(el.text.strip())
     return locs
