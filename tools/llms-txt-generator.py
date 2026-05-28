@@ -22,6 +22,7 @@ Related article:
 from __future__ import annotations
 
 import argparse
+import http.client
 import re
 import sys
 import urllib.error
@@ -131,7 +132,8 @@ def main() -> int:
             html = None
             try:
                 html = _fetch(url)
-            except (urllib.error.URLError, TimeoutError, ValueError) as e:
+            except (urllib.error.URLError, http.client.HTTPException,
+                    TimeoutError, OSError, ValueError) as e:
                 fetch_failures += 1
                 print(f"Warning: failed to fetch {url}: {e}", file=sys.stderr)
             if html is not None:
