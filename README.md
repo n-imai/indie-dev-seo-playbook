@@ -33,7 +33,7 @@ ChatGPT・Claude・Perplexity の登場で、検索流入の構造は静かに�
 ### Published
 
 - **01. Bing Webmaster Tools 活用ガイド — Google だけ見てると見落とすもの** — [note で読む](https://note.com/honeymarron_dev/n/n8dfd69eda0fd) / [リポ内 summary](chapters/01-bing-webmaster-tools.md)
-- **02. GEO — AI 検索に引用される実装（ChatGPT / Copilot / Perplexity）** — [リポ内 summary](chapters/02-geo-ai-search-citation.md)
+- **02. GEO — AI 検索に引用される実装（ChatGPT / Copilot / Perplexity）** — [note で読む](https://note.com/honeymarron_dev/n/nf2ed909fa321) / [リポ内 summary](chapters/02-geo-ai-search-citation.md)
 
 ## Tools
 
