@@ -125,19 +125,20 @@ Total: 0 URLs found across 4 indexes
 
 NOTE: domain newsite.com is not found in any recent Common Crawl index.
 
-What this means: your site is likely absent from the LLM *training data*
-corpus...
+What this means: your site is absent from Common Crawl, one of the major
+sources of LLM training data...
 What this does NOT mean: it does NOT mean AI search engines cannot cite
 you...
 ```
 
-<a id="cc-scope"></a>
+<a id="cc-scope" name="cc-scope"></a>
 
 ### ⚠ このツールで分かること / 分からないこと
 
-**分かること:** LLM の *学習データ*（Common Crawl）に自サイトが入っているか。
-入っていれば、次世代モデルが学習済み知識として自サイトを知っている可能性が
-上がる。ただしラグは数ヶ月〜年単位で、効果は不確実。
+**分かること:** LLM 学習データの主要ソースの一つである Common Crawl に
+自サイトが収録されているか。収録されていれば、次世代モデルが学習済み知識
+として自サイトを知っている可能性が上がる。ただしラグは数ヶ月〜年単位で、
+効果は不確実（各社は自前クローラも併用しており、CC 収録 = 学習採用でもない）。
 
 **分からないこと:** AI 検索で引用されるかどうか。**CC 未収録は「AI 検索に
 出ない原因」ではありません。** リアルタイムの AI 引用（Copilot / ChatGPT

@@ -10,8 +10,8 @@
 
 ChatGPT・Claude・Perplexity の登場で、検索流入の構造は静かに変わりました。
 
-- Google だけでなく **Bing** — リアルタイムの AI 引用（Copilot / ChatGPT Search / Perplexity）の grounding source はここ。**AI 検索対応の本命**
-- **Common Crawl** — LLM の *学習データ* 母体。**リアルタイムの AI 引用とは別経路**で、ラグは数ヶ月〜年単位・効果は不確実
+- Google だけでなく **Bing** — リアルタイムの AI 引用（Copilot / ChatGPT Search / Perplexity）の主な grounding source はここ。**AI 検索対応の本命**
+- **Common Crawl** — LLM 学習データの主要ソースの一つ。**リアルタイムの AI 引用とは別経路**で、ラグは数ヶ月〜年単位・効果は不確実
 - **llms.txt** (AI 向けのサイト要約仕様 — ただし現状 AI 検索エンジンはほぼ参照しておらず、効果は不確実)
 
 への対応と「何が効いて何がまだ効かないか」の見極めが、これからの個人開発者には重要です。
@@ -70,9 +70,9 @@ note 記事で言及した監査タスクを実行可能な形にしたツール
 
 コードを CC ではなく MIT にしているのは、[Creative Commons 自身がソフトウェアへの CC 適用を推奨していない](https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software)ためです。
 
-引用・転載・改変・商用利用 OK。**attribution (出典表記) のみお願いします。**
+どちらも引用・転載・改変・商用利用 OK。文章は **attribution (出典表記)**、コードは**著作権表示の保持**のみお願いします。
 
-推奨の表記:
+文章を引用する場合の推奨表記:
 
 > "Indie Dev SEO Playbook" by honeymarron ([honeymarron.com](https://honeymarron.com)),
 > licensed under CC BY 4.0.

@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # common-crawl-check.sh — 指定ドメインの Common Crawl 収録状況を確認
 #
-# Common Crawl (CC) は LLM の *学習データ* 母体。収録されると、次世代
-# モデルが「学習済み知識」として自サイトを知っている可能性が上がる。
-# ただしラグは数ヶ月〜年単位で、効果は不確実。
+# Common Crawl (CC) は LLM 学習データの主要ソースの一つ。収録されると、
+# 次世代モデルが「学習済み知識」として自サイトを知っている可能性が上がる。
+# ただしラグは数ヶ月〜年単位で、効果は不確実（各社は自前クローラも併用
+# しており、CC 収録 = 学習採用でもない）。
 #
 # ⚠ CC 未収録は「AI 検索に出ない原因」ではない。
 #   リアルタイムの AI 検索引用 (Copilot / ChatGPT Search / Perplexity)
@@ -14,7 +15,7 @@
 #   → AI 検索での引用可否を診断したいなら、CC ではなく Bing Webmaster
 #     Tools の "AI Performance" レポートを見ること。
 #
-# このスクリプトが答えるのは「学習データに入っているか」だけ。
+# このスクリプトが答えるのは「CC に収録されているか」だけ。
 #
 # Usage:
 #   ./common-crawl-check.sh example.com
@@ -88,10 +89,11 @@ if [ "$hits_any" -eq 0 ]; then
 
 NOTE: domain $domain is not found in any recent Common Crawl index.
 
-What this means: your site is likely absent from the LLM *training data*
-corpus. Future model generations may not "know" your site from training.
-Common Crawl expansion is slow (months to years) and the payoff is
-uncertain.
+What this means: your site is absent from Common Crawl, one of the major
+sources of LLM training data. Future model generations may not "know"
+your site from training (though labs also run their own crawlers, so CC
+is not the only path). CC expansion is slow (months to years) and the
+payoff is uncertain.
 
 What this does NOT mean: it does NOT mean AI search engines cannot cite
 you. Real-time AI citation (Microsoft Copilot, ChatGPT Search,
