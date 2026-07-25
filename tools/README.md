@@ -145,8 +145,9 @@ Search / Perplexity）は主に **Bing の live index** を grounding source に
 しており、Common Crawl とは別経路です。
 
 実測反例: `honeymarron.com` は Common Crawl 未収録のまま、Bing Webmaster
-Tools の "AI Performance" レポートで **Copilot 引用 7,700 回 / 3 ヶ月**を
-記録しています（2026-07 実測）。CC 収録は AI 引用の必要条件ではありません。
+Tools の "AI Performance" レポートで **Copilot 引用 8.5K / 3 か月**
+（Avg. Cited Pages 12）を記録しています（2026-07-25 実測）。CC 収録は
+AI 引用の必要条件ではありません。
 
 → AI 検索での引用を診断したいなら、**Bing Webmaster Tools → AI Performance**
 （grounding queries + cited URLs）を見てください。これが ground truth です。

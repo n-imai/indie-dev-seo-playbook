@@ -9,8 +9,8 @@
 #   リアルタイムの AI 検索引用 (Copilot / ChatGPT Search / Perplexity)
 #   は主に Bing の live index を grounding source にしており、CC とは
 #   別経路。実測反例: honeymarron.com は CC 未収録のまま、Bing AI
-#   Performance Report で Copilot 引用 7,700 回 / 3 ヶ月を記録している
-#   (2026-07 実測)。
+#   Performance Report で Copilot 引用 8.5K / 3 か月を記録している
+#   (2026-07-25 実測)。
 #   → AI 検索での引用可否を診断したいなら、CC ではなく Bing Webmaster
 #     Tools の "AI Performance" レポートを見ること。
 #
@@ -100,8 +100,8 @@ pipeline from Common Crawl. A site absent from CC can still be cited
 thousands of times.
 
   Measured counterexample: honeymarron.com is absent from Common Crawl,
-  yet Bing Webmaster Tools "AI Performance" recorded ~7,700 Copilot
-  citations over 3 months (measured 2026-07).
+  yet Bing Webmaster Tools "AI Performance" recorded 8.5K Copilot
+  citations over 3 months (measured 2026-07-25).
 
 To diagnose AI search citation, use Bing Webmaster Tools -> AI
 Performance (grounding queries + cited URLs). That is the ground truth;
