@@ -22,7 +22,7 @@ ChatGPT・Claude・Perplexity の登場で、検索流入の構造は静かに�
 
 ## 開発者の実績 (2026-05 時点)
 
-- [**表彰状クリエイター**](https://apps.apple.com/jp/app/id6748368413) — 175 カ国流通 / 月 1,000 MAU / App Store ★4.3
+- [**表彰状クリエイター**](https://apps.apple.com/jp/app/id6748368413) — 175 カ国流通 / App Store ★4.3
 - [**VoicyCare**](https://apps.apple.com/jp/app/id6749561636) — 175 カ国流通 / App Store ★5.0
 - 公式サイト: [honeymarron.com](https://honeymarron.com) — Vercel + バニラ HTML/CSS
 
