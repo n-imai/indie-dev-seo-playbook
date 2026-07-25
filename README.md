@@ -70,7 +70,10 @@ note 記事で言及した監査タスクを実行可能な形にしたツール
 
 コードを CC ではなく MIT にしているのは、[Creative Commons 自身がソフトウェアへの CC 適用を推奨していない](https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software)ためです。
 
-どちらも引用・転載・改変・商用利用 OK。文章は **attribution (出典表記)**、コードは**著作権表示の保持**のみお願いします。
+どちらも引用・転載・改変・商用利用 OK。条件だけ守ってください。
+
+- **文章（CC BY 4.0）** — attribution（出典表記）。下記の推奨表記を使えば OK
+- **コード（MIT）** — 実質的な部分を再配布する場合は、**著作権表示と MIT 許諾文（[`LICENSE`](LICENSE) 全文）の両方**を同梱
 
 文章を引用する場合の推奨表記:
 

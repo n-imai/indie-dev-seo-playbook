@@ -123,35 +123,45 @@ Total: 336 URLs found across 4 indexes
 ...
 Total: 0 URLs found across 4 indexes
 
-NOTE: domain newsite.com is not found in any recent Common Crawl index.
+NOTE: domain newsite.com was not found in the 4 Common Crawl
+index(es) checked above. This does NOT prove absence from every CC
+snapshot -- only from the ones queried...
 
-What this means: your site is absent from Common Crawl, one of the major
-sources of LLM training data...
+What this means: your site appears to be missing from these snapshots of
+Common Crawl, one of the major sources of LLM training data...
 What this does NOT mean: it does NOT mean AI search engines cannot cite
 you...
 ```
+
+**exit code 1 は「照会した index では 0 件」を意味します**（CC 全体からの不在の証明ではありません）。既定は直近 4 collection だけなので、網羅性が必要なら [index 一覧](https://index.commoncrawl.org/)から `--indexes` で追加指定してください。
 
 <a id="cc-scope" name="cc-scope"></a>
 
 ### ⚠ このツールで分かること / 分からないこと
 
-**分かること:** LLM 学習データの主要ソースの一つである Common Crawl に
-自サイトが収録されているか。収録されていれば、次世代モデルが学習済み知識
-として自サイトを知っている可能性が上がる。ただしラグは数ヶ月〜年単位で、
-効果は不確実（各社は自前クローラも併用しており、CC 収録 = 学習採用でもない）。
+**分かること:** **照会した** Common Crawl index に自サイトが収録されているか
+（CC は LLM 学習データの主要ソースの一つ）。収録されていれば、次世代モデルが
+学習済み知識として自サイトを知っている可能性が上がる。ただしラグは数ヶ月〜
+年単位で、効果は不確実（各社は自前クローラも併用しており、CC 収録 = 学習採用
+でもない）。**既定は直近 4 collection のみ**なので、0 件は「CC 全体に無い」
+ではなく「照会した snapshot に無い」です。
 
 **分からないこと:** AI 検索で引用されるかどうか。**CC 未収録は「AI 検索に
-出ない原因」ではありません。** リアルタイムの AI 引用（Copilot / ChatGPT
-Search / Perplexity）は主に **Bing の live index** を grounding source に
-しており、Common Crawl とは別経路です。
+出ない原因」ではありません。**
 
-実測反例: `honeymarron.com` は Common Crawl 未収録のまま、Bing Webmaster
-Tools の "AI Performance" レポートで **Copilot 引用 8.5K / 3 か月**
+- **Microsoft Copilot** — **Bing の live index** を grounding source にしており、Common Crawl とは別経路
+- **Perplexity / ChatGPT Search** — それぞれ自前のクローラ・インデックスを運用しており、こちらも CC 収録は前提ではない
+
+実測反例: `honeymarron.com` は照会した 4 index すべてで 0 件のまま、Bing
+Webmaster Tools の "AI Performance" レポートで **Copilot 引用 8.5K / 3 か月**
 （Avg. Cited Pages 12）を記録しています（2026-07-25 実測）。CC 収録は
 AI 引用の必要条件ではありません。
 
-→ AI 検索での引用を診断したいなら、**Bing Webmaster Tools → AI Performance**
-（grounding queries + cited URLs）を見てください。これが ground truth です。
+→ **Copilot** の引用を診断したいなら **Bing Webmaster Tools → AI Performance**
+（grounding queries + cited URLs）。これは計測対象が *Microsoft Copilots and
+Partners* なので、**その面についての** ground truth です。他のアシスタントは
+プラットフォーム固有の証跡（analytics の referrer / 各社コンソール等）で見て
+ください。いずれの場合も Common Crawl 収録は代理指標になりません。
 
 ## bing-resubmit.sh
 
@@ -216,7 +226,9 @@ printf 'Q: 質問?\nA: 回答。\n' | python3 tools/schema-faq-generator.py -
 ## License
 
 これらのツール（`*.py` / `*.sh`）は **[MIT](../LICENSE)** で公開。
-著作権表示を残してもらえれば、改変・商用利用・組み込み自由です。
+改変・商用利用・組み込み自由です。実質的な部分を再配布する場合は、
+**著作権表示と MIT 許諾文（[`LICENSE`](../LICENSE) 全文）の両方**を
+同梱してください。
 
 なお、この `tools/README.md` 自体を含む**文章**は
 **[CC BY 4.0](../LICENSE-DOCS)** です（attribution が必要）。

@@ -7,15 +7,18 @@
 # しており、CC 収録 = 学習採用でもない）。
 #
 # ⚠ CC 未収録は「AI 検索に出ない原因」ではない。
-#   リアルタイムの AI 検索引用 (Copilot / ChatGPT Search / Perplexity)
-#   は主に Bing の live index を grounding source にしており、CC とは
-#   別経路。実測反例: honeymarron.com は CC 未収録のまま、Bing AI
-#   Performance Report で Copilot 引用 8.5K / 3 か月を記録している
-#   (2026-07-25 実測)。
-#   → AI 検索での引用可否を診断したいなら、CC ではなく Bing Webmaster
-#     Tools の "AI Performance" レポートを見ること。
+#   Microsoft Copilot は Bing の live index を grounding source にして
+#   おり、CC とは別経路。Perplexity / ChatGPT Search は各々が自前の
+#   クローラ・インデックスを持つため、こちらも CC 収録は前提ではない。
+#   実測反例: honeymarron.com は CC 未収録のまま、Bing AI Performance
+#   Report で Copilot 引用 8.5K / 3 か月を記録している (2026-07-25 実測)。
+#   → Copilot の引用可否は Bing Webmaster Tools の "AI Performance"
+#     (計測対象 = Microsoft Copilots and Partners) で確認する。他の
+#     アシスタントはプラットフォーム固有の証跡で見ること。
 #
-# このスクリプトが答えるのは「CC に収録されているか」だけ。
+# このスクリプトが答えるのは「照会した CC index に収録されているか」だけ。
+# 全 index を網羅するわけではない（既定は直近 4 collection。--indexes で
+# 追加指定可。全一覧は https://index.commoncrawl.org/）。
 #
 # Usage:
 #   ./common-crawl-check.sh example.com
@@ -23,7 +26,8 @@
 #
 # Exit code:
 #   0  指定 index のいずれかに収録あり
-#   1  全 index で 0 件 (= 学習データ未収録。AI 検索での引用可否とは別問題)
+#   1  指定した全 index で 0 件 (= 照会範囲では未収録。CC 全体の不在を
+#      証明するものではなく、AI 検索での引用可否とも別問題)
 #
 # Related article:
 #   https://note.com/honeymarron_dev/n/n8dfd69eda0fd
@@ -87,27 +91,35 @@ echo "Total: $total URLs found across ${#index_array[@]} indexes"
 if [ "$hits_any" -eq 0 ]; then
   cat <<EOF
 
-NOTE: domain $domain is not found in any recent Common Crawl index.
+NOTE: domain $domain was not found in the ${#index_array[@]} Common Crawl
+index(es) checked above. This does NOT prove absence from every CC
+snapshot -- only from the ones queried. To widen the check, pass more
+collections with --indexes (see https://index.commoncrawl.org/ for the
+full list).
 
-What this means: your site is absent from Common Crawl, one of the major
-sources of LLM training data. Future model generations may not "know"
-your site from training (though labs also run their own crawlers, so CC
-is not the only path). CC expansion is slow (months to years) and the
-payoff is uncertain.
+What this means: your site appears to be missing from these snapshots of
+Common Crawl, one of the major sources of LLM training data. Future model
+generations may not "know" your site from training (though labs also run
+their own crawlers, so CC is not the only path). CC expansion is slow
+(months to years) and the payoff is uncertain.
 
 What this does NOT mean: it does NOT mean AI search engines cannot cite
-you. Real-time AI citation (Microsoft Copilot, ChatGPT Search,
-Perplexity) is grounded mainly in Bing's live index, which is a separate
-pipeline from Common Crawl. A site absent from CC can still be cited
-thousands of times.
+you. Microsoft Copilot grounds its citations in Bing's live index, which
+is a separate pipeline from Common Crawl, so a site absent from CC can
+still be cited thousands of times. Other assistants use their own
+retrieval stacks (e.g. Perplexity and ChatGPT Search operate their own
+crawlers/indexes), so CC coverage is not a prerequisite there either.
 
-  Measured counterexample: honeymarron.com is absent from Common Crawl,
-  yet Bing Webmaster Tools "AI Performance" recorded 8.5K Copilot
-  citations over 3 months (measured 2026-07-25).
+  Measured counterexample: honeymarron.com was absent from the 4 CC
+  indexes checked, yet Bing Webmaster Tools "AI Performance" recorded
+  8.5K Copilot citations over 3 months (measured 2026-07-25).
 
-To diagnose AI search citation, use Bing Webmaster Tools -> AI
-Performance (grounding queries + cited URLs). That is the ground truth;
-Common Crawl coverage is not a proxy for it.
+To diagnose citation by Microsoft Copilot, use Bing Webmaster Tools ->
+AI Performance (grounding queries + cited URLs); that is ground truth
+for Microsoft Copilots and Partners, which is the surface it measures.
+For other assistants, use platform-specific evidence instead (e.g.
+referrer/source data in your analytics, or the platform's own console).
+In none of these cases is Common Crawl coverage a proxy.
 
 If you specifically want training-data inclusion:
   1. Get inbound links from sites already in CC:
