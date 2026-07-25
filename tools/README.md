@@ -214,8 +214,11 @@ printf 'Q: 質問?\nA: 回答。\n' | python3 tools/schema-faq-generator.py -
 
 ## License
 
-これらのツールは記事と同じく [CC BY 4.0](../LICENSE) で公開。
-attribution を付けてもらえれば、改変・商用利用・組み込み自由です。
+これらのツール（`*.py` / `*.sh`）は **[MIT](../LICENSE)** で公開。
+著作権表示を残してもらえれば、改変・商用利用・組み込み自由です。
+
+なお、この `tools/README.md` 自体を含む**文章**は
+**[CC BY 4.0](../LICENSE-DOCS)** です（attribution が必要）。
 
 ## Related
 

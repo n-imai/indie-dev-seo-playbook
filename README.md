@@ -63,10 +63,10 @@ note 記事で言及した監査タスクを実行可能な形にしたツール
 
 ## License
 
-| 対象 | License |
-|---|---|
-| 文章・ドキュメント（README, `chapters/`, `tools/README.md`）| [CC BY 4.0](LICENSE) |
-| コード（`tools/` の `*.py` / `*.sh`, `tests/`）| [MIT](tools/LICENSE) |
+| 対象 | License | ファイル |
+|---|---|---|
+| コード（`tools/` の `*.py` / `*.sh`, `tests/`）| **MIT** | [`LICENSE`](LICENSE) |
+| 文章・ドキュメント（README, `chapters/`, `tools/README.md`）| **CC BY 4.0** | [`LICENSE-DOCS`](LICENSE-DOCS) |
 
 コードを CC ではなく MIT にしているのは、[Creative Commons 自身がソフトウェアへの CC 適用を推奨していない](https://creativecommons.org/faq/#can-i-apply-a-creative-commons-license-to-software)ためです。
 
