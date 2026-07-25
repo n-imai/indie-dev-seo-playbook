@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 # common-crawl-check.sh — 指定ドメインの Common Crawl 収録状況を確認
 #
-# Common Crawl は ChatGPT/Claude/Perplexity の training data の中核。
-# 自分のサイトが CC に収録されていないと、AI 検索結果に出てこない原因
-# になり得る。このスクリプトは直近の 4 つの CC index に対して、指定
-# ドメインの URL がどれだけ収録されているかを確認する。
+# Common Crawl (CC) は LLM の *学習データ* 母体。収録されると、次世代
+# モデルが「学習済み知識」として自サイトを知っている可能性が上がる。
+# ただしラグは数ヶ月〜年単位で、効果は不確実。
+#
+# ⚠ CC 未収録は「AI 検索に出ない原因」ではない。
+#   リアルタイムの AI 検索引用 (Copilot / ChatGPT Search / Perplexity)
+#   は主に Bing の live index を grounding source にしており、CC とは
+#   別経路。実測反例: honeymarron.com は CC 未収録のまま、Bing AI
+#   Performance Report で Copilot 引用 7,700 回 / 3 ヶ月を記録している
+#   (2026-07 実測)。
+#   → AI 検索での引用可否を診断したいなら、CC ではなく Bing Webmaster
+#     Tools の "AI Performance" レポートを見ること。
+#
+# このスクリプトが答えるのは「学習データに入っているか」だけ。
 #
 # Usage:
 #   ./common-crawl-check.sh example.com
@@ -12,7 +22,7 @@
 #
 # Exit code:
 #   0  指定 index のいずれかに収録あり
-#   1  全 index で 0 件 (AI 検索流入ゼロの原因の可能性)
+#   1  全 index で 0 件 (= 学習データ未収録。AI 検索での引用可否とは別問題)
 #
 # Related article:
 #   https://note.com/honeymarron_dev/n/n8dfd69eda0fd
@@ -76,22 +86,35 @@ echo "Total: $total URLs found across ${#index_array[@]} indexes"
 if [ "$hits_any" -eq 0 ]; then
   cat <<EOF
 
-WARNING: domain $domain is not found in any recent Common Crawl index.
+NOTE: domain $domain is not found in any recent Common Crawl index.
 
-This is a strong signal that AI search engines (ChatGPT, Claude.ai,
-Perplexity) have NOT learned about your site. Common Crawl is the
-core dataset for LLM training, and crawls primarily come from links
-on already-indexed sites.
+What this means: your site is likely absent from the LLM *training data*
+corpus. Future model generations may not "know" your site from training.
+Common Crawl expansion is slow (months to years) and the payoff is
+uncertain.
 
-To get into Common Crawl:
+What this does NOT mean: it does NOT mean AI search engines cannot cite
+you. Real-time AI citation (Microsoft Copilot, ChatGPT Search,
+Perplexity) is grounded mainly in Bing's live index, which is a separate
+pipeline from Common Crawl. A site absent from CC can still be cited
+thousands of times.
+
+  Measured counterexample: honeymarron.com is absent from Common Crawl,
+  yet Bing Webmaster Tools "AI Performance" recorded ~7,700 Copilot
+  citations over 3 months (measured 2026-07).
+
+To diagnose AI search citation, use Bing Webmaster Tools -> AI
+Performance (grounding queries + cited URLs). That is the ground truth;
+Common Crawl coverage is not a proxy for it.
+
+If you specifically want training-data inclusion:
   1. Get inbound links from sites already in CC:
      - Wikipedia / Wikidata (via citing your site)
      - GitHub README files (CC crawls GitHub heavily)
      - Hacker News / Reddit submissions
      - Independent blogs / news sites
   2. Verify your site is crawlable (robots.txt, no JS-only render)
-  3. Add llms.txt with canonical content for AI crawlers
-  4. Wait 2-4 months (CC frontier expansion is slow)
+  3. Wait 2-4 months (CC frontier expansion is slow)
 
 EOF
   exit 1

@@ -9,7 +9,7 @@ note 記事で言及した SEO/ASO 監査タスクを実行可能な形にした
 |---|---|---|---|
 | [`meta-desc-checker.py`](meta-desc-checker.py) | 全 HTML の meta description 文字数監査 | Python 3.10+ | 標準ライブラリのみ |
 | [`twin-fields-check.py`](twin-fields-check.py) | meta/og/twitter/JSON-LD の twin fields 同期検証 | Python 3.10+ | 標準ライブラリのみ |
-| [`common-crawl-check.sh`](common-crawl-check.sh) | Common Crawl 収録状況の確認 | Bash | `curl` |
+| [`common-crawl-check.sh`](common-crawl-check.sh) | Common Crawl（LLM 学習データ）収録状況の確認 | Bash | `curl` |
 | [`bing-resubmit.sh`](bing-resubmit.sh) | Bing Webmaster URL 一括再送信 | Bash | `curl`, `jq` |
 | [`llms-txt-generator.py`](llms-txt-generator.py) | sitemap.xml から llms.txt skeleton 生成 | Python 3.10+ | 標準ライブラリのみ |
 | [`schema-faq-generator.py`](schema-faq-generator.py) | Q&A テキストから FAQPage JSON-LD 生成 | Python 3.10+ | 標準ライブラリのみ |
@@ -123,13 +123,33 @@ Total: 336 URLs found across 4 indexes
 ...
 Total: 0 URLs found across 4 indexes
 
-WARNING: domain newsite.com is not found in any recent Common Crawl index.
-This is a strong signal that AI search engines (ChatGPT, Claude.ai,
-Perplexity) have NOT learned about your site...
+NOTE: domain newsite.com is not found in any recent Common Crawl index.
+
+What this means: your site is likely absent from the LLM *training data*
+corpus...
+What this does NOT mean: it does NOT mean AI search engines cannot cite
+you...
 ```
 
-CC 未収録は AI 検索流入ゼロの直接的な原因なので、新規ドメインで
-running する場合は早期に確認しておくと良い。
+<a id="cc-scope"></a>
+
+### ⚠ このツールで分かること / 分からないこと
+
+**分かること:** LLM の *学習データ*（Common Crawl）に自サイトが入っているか。
+入っていれば、次世代モデルが学習済み知識として自サイトを知っている可能性が
+上がる。ただしラグは数ヶ月〜年単位で、効果は不確実。
+
+**分からないこと:** AI 検索で引用されるかどうか。**CC 未収録は「AI 検索に
+出ない原因」ではありません。** リアルタイムの AI 引用（Copilot / ChatGPT
+Search / Perplexity）は主に **Bing の live index** を grounding source に
+しており、Common Crawl とは別経路です。
+
+実測反例: `honeymarron.com` は Common Crawl 未収録のまま、Bing Webmaster
+Tools の "AI Performance" レポートで **Copilot 引用 7,700 回 / 3 ヶ月**を
+記録しています（2026-07 実測）。CC 収録は AI 引用の必要条件ではありません。
+
+→ AI 検索での引用を診断したいなら、**Bing Webmaster Tools → AI Performance**
+（grounding queries + cited URLs）を見てください。これが ground truth です。
 
 ## bing-resubmit.sh
 

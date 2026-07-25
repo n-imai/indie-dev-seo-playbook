@@ -8,7 +8,7 @@
 
 ## 概要
 
-個人開発で iOS アプリ 2 本(表彰状クリエイター ★4.3 / VoicyCare ★5.0)を 175 カ国に流通させた経験から、サイト運営の検索流入の **9 割が Bing 経由**になっていたという気付きをベースに、Bing Webmaster Tools の活用ノウハウを解説した記事です。
+個人開発で iOS アプリ 2 本(表彰状クリエイター ★4.3 / VoicyCare ★5.0 — いずれも 2026-05 時点)を 175 カ国に流通させた経験から、サイト運営の検索流入の **9 割が Bing 経由**になっていたという気付きをベースに、Bing Webmaster Tools の活用ノウハウを解説した記事です。
 
 ### この章でカバーする内容
 
@@ -26,7 +26,7 @@
 ## なぜ note と GitHub の両方にあるのか
 
 - **note**: 記事本文を公開する場所 (Google/Bing の SEO 流入を狙う、note プラットフォーム内の拡散を狙う)
-- **GitHub (このリポ)**: 記事の目次・補足ツール・コード例の置き場所 (developer コミュニティから fork/star、Common Crawl seed)
+- **GitHub (このリポ)**: 記事の目次・補足ツール・コード例の置き場所 (developer コミュニティから fork/star)
 
 役割を分離して、それぞれのプラットフォームの strength を活かす構成にしています。**記事本文を両方に置くと duplicate content として SEO 上どちらかが suppress されるため**、こちらは要約 + リンクのみにしています。
 
@@ -36,7 +36,7 @@
 
 - [`tools/meta-desc-checker.py`](../tools/meta-desc-checker.py) — 全 HTML の meta description 長さチェック
 - [`tools/twin-fields-check.py`](../tools/twin-fields-check.py) — meta/og/twitter/JSON-LD の同期検証
-- [`tools/common-crawl-check.sh`](../tools/common-crawl-check.sh) — Common Crawl 収録確認
+- [`tools/common-crawl-check.sh`](../tools/common-crawl-check.sh) — Common Crawl（LLM 学習データ）収録確認 ※AI 検索引用の診断には使えません
 - [`tools/bing-resubmit.sh`](../tools/bing-resubmit.sh) — Bing Webmaster API 経由の URL 一括再送信
 
 ## 関連
