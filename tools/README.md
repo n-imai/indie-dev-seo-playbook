@@ -9,7 +9,7 @@ note 記事で言及した SEO/ASO 監査タスクを実行可能な形にした
 |---|---|---|---|
 | [`meta-desc-checker.py`](meta-desc-checker.py) | 全 HTML の meta description 文字数監査 | Python 3.10+ | 標準ライブラリのみ |
 | [`twin-fields-check.py`](twin-fields-check.py) | meta/og/twitter/JSON-LD の twin fields 同期検証 | Python 3.10+ | 標準ライブラリのみ |
-| [`common-crawl-check.sh`](common-crawl-check.sh) | Common Crawl 収録状況の確認 | Bash | `curl` |
+| [`common-crawl-check.sh`](common-crawl-check.sh) | Common Crawl（LLM 学習データ）収録状況の確認 | Bash | `curl` |
 | [`bing-resubmit.sh`](bing-resubmit.sh) | Bing Webmaster URL 一括再送信 | Bash | `curl`, `jq` |
 | [`llms-txt-generator.py`](llms-txt-generator.py) | sitemap.xml から llms.txt skeleton 生成 | Python 3.10+ | 標準ライブラリのみ |
 | [`schema-faq-generator.py`](schema-faq-generator.py) | Q&A テキストから FAQPage JSON-LD 生成 | Python 3.10+ | 標準ライブラリのみ |
@@ -123,13 +123,45 @@ Total: 336 URLs found across 4 indexes
 ...
 Total: 0 URLs found across 4 indexes
 
-WARNING: domain newsite.com is not found in any recent Common Crawl index.
-This is a strong signal that AI search engines (ChatGPT, Claude.ai,
-Perplexity) have NOT learned about your site...
+NOTE: domain newsite.com was not found in the 4 Common Crawl
+index(es) checked above. This does NOT prove absence from every CC
+snapshot -- only from the ones queried...
+
+What this means: your site appears to be missing from these snapshots of
+Common Crawl, one of the major sources of LLM training data...
+What this does NOT mean: it does NOT mean AI search engines cannot cite
+you...
 ```
 
-CC 未収録は AI 検索流入ゼロの直接的な原因なので、新規ドメインで
-running する場合は早期に確認しておくと良い。
+**exit code 1 は「照会した index では 0 件」を意味します**（CC 全体からの不在の証明ではありません）。既定は直近 4 collection だけなので、網羅性が必要なら [index 一覧](https://index.commoncrawl.org/)から `--indexes` で追加指定してください。
+
+<a id="cc-scope" name="cc-scope"></a>
+
+### ⚠ このツールで分かること / 分からないこと
+
+**分かること:** **照会した** Common Crawl index に自サイトが収録されているか
+（CC は LLM 学習データの主要ソースの一つ）。収録されていれば、次世代モデルが
+学習済み知識として自サイトを知っている可能性が上がる。ただしラグは数ヶ月〜
+年単位で、効果は不確実（各社は自前クローラも併用しており、CC 収録 = 学習採用
+でもない）。**既定は直近 4 collection のみ**なので、0 件は「CC 全体に無い」
+ではなく「照会した snapshot に無い」です。
+
+**分からないこと:** AI 検索で引用されるかどうか。**CC 未収録は「AI 検索に
+出ない原因」ではありません。**
+
+- **Microsoft Copilot** — **Bing の live index** を grounding source にしており、Common Crawl とは別経路
+- **Perplexity / ChatGPT Search** — それぞれ自前のクローラ・インデックスを運用しており、こちらも CC 収録は前提ではない
+
+実測反例: `honeymarron.com` は照会した 4 index すべてで 0 件のまま、Bing
+Webmaster Tools の "AI Performance" レポートで **Copilot 引用 8.5K / 3 か月**
+（Avg. Cited Pages 12）を記録しています（2026-07-25 実測）。CC 収録は
+AI 引用の必要条件ではありません。
+
+→ **Copilot** の引用を診断したいなら **Bing Webmaster Tools → AI Performance**
+（grounding queries + cited URLs）。これは計測対象が *Microsoft Copilots and
+Partners* なので、**その面についての** ground truth です。他のアシスタントは
+プラットフォーム固有の証跡（analytics の referrer / 各社コンソール等）で見て
+ください。いずれの場合も Common Crawl 収録は代理指標になりません。
 
 ## bing-resubmit.sh
 
@@ -193,8 +225,13 @@ printf 'Q: 質問?\nA: 回答。\n' | python3 tools/schema-faq-generator.py -
 
 ## License
 
-これらのツールは記事と同じく [CC BY 4.0](../LICENSE) で公開。
-attribution を付けてもらえれば、改変・商用利用・組み込み自由です。
+これらのツール（`*.py` / `*.sh`）は **[MIT](../LICENSE)** で公開。
+改変・商用利用・組み込み自由です。実質的な部分を再配布する場合は、
+**著作権表示と MIT 許諾文（[`LICENSE`](../LICENSE) 全文）の両方**を
+同梱してください。
+
+なお、この `tools/README.md` 自体を含む**文章**は
+**[CC BY 4.0](../LICENSE-DOCS)** です（attribution が必要）。
 
 ## Related
 

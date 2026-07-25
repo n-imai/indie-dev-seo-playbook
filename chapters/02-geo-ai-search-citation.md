@@ -27,7 +27,7 @@
 ## なぜ note と GitHub の両方にあるのか
 
 - **note**: 記事本文を公開する場所 (Google/Bing の SEO 流入を狙う、note プラットフォーム内の拡散を狙う)
-- **GitHub (このリポ)**: 記事の目次・補足ツール・コード例の置き場所 (developer コミュニティから fork/star、Common Crawl seed)
+- **GitHub (このリポ)**: 記事の目次・補足ツール・コード例の置き場所 (developer コミュニティから fork/star)
 
 役割を分離して、それぞれのプラットフォームの strength を活かす構成にしています。**記事本文を両方に置くと duplicate content として SEO 上どちらかが suppress されるため**、こちらは要約 + リンクのみにしています。
 
@@ -37,7 +37,7 @@
 
 - [`tools/llms-txt-generator.py`](../tools/llms-txt-generator.py) — sitemap.xml から llms.txt skeleton 生成
 - [`tools/schema-faq-generator.py`](../tools/schema-faq-generator.py) — Q&A テキストから FAQPage JSON-LD 生成
-- [`tools/common-crawl-check.sh`](../tools/common-crawl-check.sh) — Common Crawl 収録確認
+- [`tools/common-crawl-check.sh`](../tools/common-crawl-check.sh) — Common Crawl（LLM 学習データ）収録確認 ※AI 検索引用の診断には使えません
 
 ## 関連
 
